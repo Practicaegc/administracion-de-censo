@@ -11,12 +11,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Votacion extends DomainEntity{
+public class Vote extends DomainEntity{
 	
 	private String name;
 	private Collection<User>users;
 	
-	public Votacion(){
+	public Vote(){
 		
 	}
 
@@ -30,7 +30,7 @@ public class Votacion extends DomainEntity{
 	}
 
 	@NotNull
-	@ManyToMany(mappedBy="votaciones")
+	@ManyToMany(mappedBy="votes")
 	public Collection<User> getUsers() {
 		return users;
 	}

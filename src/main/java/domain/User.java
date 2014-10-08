@@ -19,7 +19,7 @@ public class User extends DomainEntity{
 	private String password;
 	
 	
-	private Collection<Votacion> votaciones;
+	private Collection<Vote> votes;
 	
 	public User(){
 		
@@ -45,12 +45,12 @@ public class User extends DomainEntity{
 
 	@NotNull
 	@ManyToMany
-	public Collection<Votacion> getVotaciones() {
-		return votaciones;
+	public Collection<Vote> getVotes() {
+		return votes;
 	}
 
-	public void setVotaciones(Collection<Votacion> votaciones) {
-		this.votaciones = votaciones;
+	public void setVotes(Collection<Vote> votes) {
+		this.votes = votes;
 	}
 	
 	
