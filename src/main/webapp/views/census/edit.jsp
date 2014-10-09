@@ -25,7 +25,7 @@
 		<form:hidden path="users"/>
 		
 		
-		<acme:textarea code="census.name" path="name"/>
+		<acme:textbox code="census.name" path="name"/>
 		
 		<acme:submit name="save" code="census.save"/>
 

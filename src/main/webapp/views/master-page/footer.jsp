@@ -12,8 +12,16 @@
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+
 <jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> ADMCenso Co., Inc.</b>
+<div id="copyright" class="container">
+	<p>
+		Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> AgoraUs Co., Inc. | Cracion/Administracion de censos | 
+		
+	</p>
+</div>

@@ -28,46 +28,70 @@
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
-<script type="text/javascript" src="scripts/jmenu.js"></script>
 
-<link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen"
-	type="text/css" />
-<link rel="stylesheet" href="styles/displaytag.css" type="text/css">
+<link href="styles/default.css" rel="stylesheet" type="text/css" media="all" />
 
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
+<title>
+	<tiles:insertAttribute name="title" ignore="true" />
+	<jstl:if test="${not empty subtitle}">
+		<jstl:out value="${subtitle}" />
+	</jstl:if>
+</title>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#jMenu").jMenu();
-	});
-
-	function askSubmission(msg, form) {
-		if (confirm(msg))
-			form.submit();
-	}
-</script>
+		function relativeRedir(loc) {	
+			var b = document.getElementsByTagName('base');
+			if (b && b[0] && b[0].href) {
+	  			if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')
+	    		loc = loc.substr(1);
+	  			loc = b[0].href + loc;
+			}
+			window.location.replace(loc);
+		}
+	</script>
 
 </head>
 
 <body>
+<div id="contenedor">
 
-	<div>
+<div id="logo">
+	<a href="welcome/index.do"><img src="images/logo.jpg" alt="Acme-Adventure Co., Inc." style="width: 300px; height: 200px;" /></a>
+	<br /><br />
+	<a href="?language=en" title="English"><strong>English</strong></a>&nbsp;|&nbsp;<a href="?language=es"><strong>Español</strong></a>
+</div>
+
+<div id="header">
+	<div id="menu" class="container">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div>
-		<h1>
-			<tiles:insertAttribute name="title" />
-		</h1>
-		<tiles:insertAttribute name="body" />	
-		<jstl:if test="${message != null}">
-			<br />
-			<span class="message"><spring:message code="${message}" /></span>
-		</jstl:if>	
+</div>
+ 
+<div id="page-wrapper">
+	<div id="page" class="container">
+		<div id="content">
+			<div class="title">
+				<h2>
+					<tiles:insertAttribute name="title" />
+					<jstl:if test="${not empty subtitle}">
+						<jstl:out value="${subtitle}" />
+					</jstl:if>
+				</h2>
+			</div>
+			<jstl:if test="${message != null}">
+				<span class="message"><spring:message code="${message}" /></span>
+				<br />
+				<br />
+			</jstl:if>
+			<p>
+				<tiles:insertAttribute name="body" />
+			</p>
+		</div>
 	</div>
-	<div>
-		<tiles:insertAttribute name="footer" />
-	</div>
+</div>
+<tiles:insertAttribute name="footer" />
+
+</div>
 
 </body>
 </html>

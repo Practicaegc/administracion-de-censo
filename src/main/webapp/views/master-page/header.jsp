@@ -13,27 +13,14 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<div>
-	<img src="images/logo.png" alt="ADMCenso Co., Inc." />
-</div>
 
-<div>
-	<ul id="jMenu">
-		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		
-		
-		
-		
+<div id="cssmenu">
+	<ul>
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="census/create.do"><spring:message code="master.page.census.create" /></a></li>
 		</security:authorize>
-		
-		
 	</ul>
 </div>
 
-<div>
-	<a href="?language=en">en</a> | <a href="?language=es">es</a>
-</div>
 
