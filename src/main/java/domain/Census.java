@@ -1,23 +1,45 @@
 package domain;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Vote extends DomainEntity{
+public class Census extends DomainEntity{
 	
+	private Date date;
 	private String name;
-	private Collection<User>users;
 	
-	public Vote(){
+	private Collection<User> users;
+	
+	
+	public Census(){
 		
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@NotNull
+	@Past
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@NotBlank
@@ -29,8 +51,9 @@ public class Vote extends DomainEntity{
 		this.name = name;
 	}
 
+
 	@NotNull
-	@ManyToMany(mappedBy="votes")
+	@ManyToMany
 	public Collection<User> getUsers() {
 		return users;
 	}
@@ -38,6 +61,9 @@ public class Vote extends DomainEntity{
 	public void setUsers(Collection<User> users) {
 		this.users = users;
 	}
+	
+	
+	
 	
 	
 

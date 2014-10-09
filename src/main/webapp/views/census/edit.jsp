@@ -15,5 +15,18 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="administrator.action.2" /></p>
+<form:form id="form" action="census/edit.do" modelAttribute="census">
+
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="date" />
+		<form:hidden path="users"/>
+		
+		
+		<acme:textarea code="census.name" path="name"/>
+		
+		<acme:submit name="save" code="census.save"/>
+
+	</form:form>
