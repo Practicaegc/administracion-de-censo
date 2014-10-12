@@ -1,5 +1,5 @@
 <%--
- * textbox.tag
+ * select.tag
  *
  * Copyright (C) 2014 Universidad de Sevilla
  * 
@@ -21,18 +21,19 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <%-- Attributes --%> 
- 
+
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 
-<%@ attribute name="readonly" required="false" %>
-<%@ attribute name="placeholder" required="false" %>
+<%@ attribute name="id" required="false" %>
+<%@ attribute name="onchange" required="false" %>
 
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
+<jstl:if test="${id == null}">
+	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
 </jstl:if>
-<jstl:if test="${placeholder == null}">
-	<jstl:set var="placeholder" value="" />
+
+<jstl:if test="${onchange == null}">
+	<jstl:set var="onchange" value="javascript: return true;" />
 </jstl:if>
 
 <%-- Definition --%>
@@ -40,13 +41,25 @@
 <div class="formItem">
 	<div class="formLeft">
 		<form:label path="${path}">
-			<spring:message code="${code}" />:
+			<spring:message code="itemAvailable.state" />
 		</form:label>
 	</div>
 	<div class="formCenter">
-		<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>
-	</div>	
+		<form:select path="${path}">
+        	<form:option value="0" label="------------"/>        
+        	<form:options itemLabel="label"/>        
+        </form:select>
+	</div>
 </div>
 <div class="divCenter">
-	<form:errors path="${path}" cssClass="error" />
+	<form:errors cssClass="error" path="${path}" />
 </div>
+
+
+
+
+
+
+
+                               
+                               

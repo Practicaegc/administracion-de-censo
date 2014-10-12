@@ -27,10 +27,16 @@
 
 <%-- Definition --%>
 
-<div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>
-	<form:password path="${path}"/>
+<div class="formItem">
+	<div class="formLeft">
+		<form:label path="${path}">
+			<spring:message code="${code}" />:
+		</form:label>
+	</div>
+	<div class="formCenter">
+		<form:password path="${path}"/>
+	</div>
+</div>
+<div class="divCenter">
 	<form:errors path="${path}" cssClass="error" />
 </div>

@@ -19,6 +19,7 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="census/create.do"><spring:message code="master.page.census.create" /></a></li>
+			<li><a class="fNiv" href="census/list.do"><spring:message code="master.page.census.list" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

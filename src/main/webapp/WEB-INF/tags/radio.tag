@@ -1,5 +1,5 @@
 <%--
- * textbox.tag
+ * textarea.tag
  *
  * Copyright (C) 2014 Universidad de Sevilla
  * 
@@ -21,31 +21,36 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <%-- Attributes --%> 
- 
+
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
-
 <%@ attribute name="readonly" required="false" %>
-<%@ attribute name="placeholder" required="false" %>
+
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
-<jstl:if test="${placeholder == null}">
-	<jstl:set var="placeholder" value="" />
-</jstl:if>
 
 <%-- Definition --%>
 
-<div class="formItem">
+<div id ="textArea" class="formItem">
 	<div class="formLeft">
 		<form:label path="${path}">
-			<spring:message code="${code}" />:
+			<spring:message code="${code}.yes" />:
 		</form:label>
 	</div>
 	<div class="formCenter">
-		<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>
-	</div>	
+		<form:radiobutton path="${path}" value="true"/>
+	</div>
+	<br/>
+	<div class="formLeft">
+		<form:label path="${path}">
+			<spring:message code="${code}.no" />:
+		</form:label>
+	</div>
+	<div class="formCenter">
+		<form:radiobutton path="${path}" value="false"/>
+	</div>
 </div>
 <div class="divCenter">
 	<form:errors path="${path}" cssClass="error" />

@@ -22,31 +22,14 @@
 
 <%-- Attributes --%> 
  
+<%@ attribute name="items" required="true" %>
 <%@ attribute name="path" required="true" %>
-<%@ attribute name="code" required="true" %>
-
-<%@ attribute name="readonly" required="false" %>
-<%@ attribute name="placeholder" required="false" %>
-
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
-</jstl:if>
-<jstl:if test="${placeholder == null}">
-	<jstl:set var="placeholder" value="" />
-</jstl:if>
+<%@ attribute name="itemLabel" required="true" %>
 
 <%-- Definition --%>
 
-<div class="formItem">
-	<div class="formLeft">
-		<form:label path="${path}">
-			<spring:message code="${code}" />:
-		</form:label>
-	</div>
-	<div class="formCenter">
-		<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>
-	</div>	
-</div>
-<div class="divCenter">
-	<form:errors path="${path}" cssClass="error" />
-</div>
+<jstl:out value="${items}"></jstl:out><br>
+<jstl:out value="${path}"></jstl:out><br>
+<jstl:out value="${itemLabel}"></jstl:out>
+<form:checkboxes items="${items}" path="${path}" itemLabel="${itemLabel}" />
+

@@ -14,6 +14,7 @@ package controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class CensusController extends AbstractController {
 	// Create census ---------------------------------------------------------------		
 
 	@RequestMapping("/create")
-	public ModelAndView action1() {
+	public ModelAndView create() {
 		ModelAndView result;
 		Census  c = censusService.create();
 		result = createEditModelAndView(c);
@@ -50,17 +51,43 @@ public class CensusController extends AbstractController {
 	}
 	
 	
+	@RequestMapping("/list")
+	public ModelAndView list(){
+		String requestURI = "census/list.do";
+		ModelAndView result = new ModelAndView("census/list");
+		result.addObject("censuses", censusService.findAll());
+		result.addObject("requestURI", requestURI);
+		return result;
+	}
 	
 	
 	// Details ----------------------------------------------------------------
-		@RequestMapping(value = "/details", method = RequestMethod.GET)
-		public ModelAndView display(@RequestParam int censusId) {
-			ModelAndView result;
-			Census census= censusService.findOne(censusId);
-			result=createEditModelAndView(census);
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int censusId) {
+		ModelAndView result;
+		Census census= censusService.findOne(censusId);
+		result=createEditModelAndView(census);
 
-			return result;
+		return result;
+	}
+	
+	// Delete ----------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int censusId) {
+		ModelAndView result = null;
+		try{
+			censusService.delete(censusId);
+			result = new ModelAndView("redirect:/census/list.do");
+			
+		}catch(Exception oops){
+			result = new ModelAndView("redirect:/census/details.do?censusId="+censusId);
+			result.addObject("message", "No se pudo borrar el censo");
+			oops.getStackTrace();
 		}
+		
+
+		return result;
+	}
 		
 
 	//Save
@@ -74,7 +101,11 @@ public class CensusController extends AbstractController {
 		} else {
 			try {
 				censusService.save(census);
-				result = new ModelAndView("welcome/index");
+				result = new ModelAndView("redirect:/census/list.do");
+				
+			}catch(DataIntegrityViolationException uups){
+				result = createEditModelAndView(census, "census.duplicated.name");	 
+			
 			} catch (Throwable oops) {
 				result = createEditModelAndView(census, "census.commit.error");				
 			}
@@ -95,6 +126,13 @@ public class CensusController extends AbstractController {
 	
 	protected ModelAndView createEditModelAndView(Census census, String message) {
 		ModelAndView result = new ModelAndView("census/create");
+		
+		if(census.getId() != 0){
+			result = new ModelAndView("census/details");
+			//result.addObject("users", userService.findAllByCensus(census.getId()));
+			result.addObject("users", census.getUsers());
+		}
+		
 		
 		
 		result.addObject("census", census);

@@ -24,15 +24,19 @@
  
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
+<%@ attribute name="min" required="true" %>
+<%@ attribute name="max" required="true" %>
+<%@ attribute name="value" required="false" %>
+
 
 <%@ attribute name="readonly" required="false" %>
-<%@ attribute name="placeholder" required="false" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
-<jstl:if test="${placeholder == null}">
-	<jstl:set var="placeholder" value="" />
+
+<jstl:if test="${value == null}">
+	<jstl:set var="value" value="1" />
 </jstl:if>
 
 <%-- Definition --%>
@@ -44,8 +48,8 @@
 		</form:label>
 	</div>
 	<div class="formCenter">
-		<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>
-	</div>	
+		<form:input type="number" path="${path}" min ="${min}" max ="${max}" value = "${value}" readonly="${readonly}"/>
+	</div>
 </div>
 <div class="divCenter">
 	<form:errors path="${path}" cssClass="error" />

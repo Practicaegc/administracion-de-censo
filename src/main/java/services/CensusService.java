@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import repositories.CensusRepository;
 
@@ -52,7 +53,8 @@ public class CensusService {
 	}
 	
 	public void delete(int censusId){
-		
+		Census c = findOne(censusId);
+		Assert.isTrue(c.getUsers().isEmpty());
 		censusRepository.delete(censusId);
 	}
 	
@@ -60,6 +62,10 @@ public class CensusService {
 		
 		Census c = censusRepository.findOne(censusId);
 		return c;
+	}
+	
+	public Collection<Census> findAll(){
+		return censusRepository.findAll();
 	}
 	
 

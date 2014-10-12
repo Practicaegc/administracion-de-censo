@@ -26,16 +26,23 @@
 <%@ attribute name="code" required="true" %>
 <%@ attribute name="readonly" required="false" %>
 
+
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
 
 <%-- Definition --%>
 
-<div class="form-group">
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>
-	<form:textarea path="${path}" readonly="${readonly}" />
+<div id ="textArea" class="formItem">
+	<div class="formLeft">
+		<form:label path="${path}">
+			<spring:message code="${code}" />:
+		</form:label>
+	</div>
+	<div class="formCenter">
+		<form:textarea path="${path}" readonly="${readonly}"/>
+	</div>
+</div>
+<div class="divCenter">
 	<form:errors path="${path}" cssClass="error" />
 </div>
