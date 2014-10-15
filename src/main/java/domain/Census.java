@@ -23,7 +23,7 @@ public class Census extends DomainEntity{
 	private Date date;
 	private String name;
 	
-	private Collection<User> users;
+	private Collection<User> usuarios;
 	
 	
 	public Census(){
@@ -54,12 +54,12 @@ public class Census extends DomainEntity{
 
 	@NotNull
 	@ManyToMany
-	public Collection<User> getUsers() {
-		return users;
+	public Collection<User> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setUsers(Collection<User> users) {
-		this.users = users;
+	public void setUsuarios(Collection<User> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	
